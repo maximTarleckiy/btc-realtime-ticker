@@ -1,0 +1,13 @@
+{
+  "name": "maximt/btc-ticker",
+
+  "autoload": {
+    "psr-4": {"app\\": "app/"}
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.2",
+    "doctrine/dbal": "^2.5",
+    "cboden/ratchet": "^0.3.6",
+    "ratchet/pawl": "^0.2.3"
+  }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BTC ticker</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="Client.js"></script>
+    <script src="Calculator.js"></script>
+    <script type="text/javascript">
+        var calculator = new Calculator();
+        var client = new Client('ws://' + window.location.href.split('/')[2] + ':8080', calculator);
+        var interval = setInterval(
+            function() {
+                var res = calculator.calculate();
+                client.markTable(res['exchanges']);
+
+                document.getElementById('btc_usd').innerHTML = res['btc_usd']['mean'] || '---';
+                document.getElementById('euro_usd').innerHTML = res['euro_usd']['mean'] || '---';
+                document.getElementById('btc_euro').innerHTML = res['btc_euro']['mean'] || '---';
+            },
+            3000
+        );
+        function stop() {
+            clearInterval(interval);
+        }
+
+    </script>
+
+</head>
+<body>
+    <table class="table" style="width: 30%;">
+        <thead>
+        <tr>
+            <th>Provider</th>
+            <th>Exchange</th>
+            <th>Value</th>
+            <th>Time</th>
+            <th>Expiration Interval</th>
+        </tr>
+        </thead>
+        <tbody id="providers">
+        </tbody>
+    </table>
+    <div style="position: absolute; top: 10px; left: 31%;">
+        <span><b>BTC/USD:</b><span id="btc_usd">---</span></span>
+        <span><b>EUR/USD:</b><span id="euro_usd">---</span></span>
+        <span><b>BTC/EUR:</b><span id="btc_euro">---</span></span>
+    </div>
+</body>
+</html>
