@@ -1,0 +1,15 @@
+# btc-realtime-ticker
+
+This is simple web app framework which in realtime shows Exchange Rate for BTC\USD, EUR\USD, BTC\EUR.
+Framework alows to add any Exchange Providers and calculate Exchange Rates only for actual data.
+
+#How to run this app
+
+launch webSocket server
+run php bin/ws_server.php
+
+open index.html page
+http://localhost/btc-realtime-ticker/
+
+run feed collector
+php bin/collect-data.php
