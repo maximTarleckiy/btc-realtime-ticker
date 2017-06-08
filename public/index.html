@@ -5,25 +5,11 @@
     <title>BTC ticker</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="Client.js"></script>
+    <script src="Ticker.js"></script>
     <script src="Calculator.js"></script>
     <script type="text/javascript">
-        var calculator = new Calculator();
-        var client = new Client('ws://' + window.location.href.split('/')[2] + ':8080', calculator);
-        var interval = setInterval(
-            function() {
-                var res = calculator.calculate();
-                client.markTable(res['exchanges']);
-
-                document.getElementById('btc_usd').innerHTML = res['btc_usd']['mean'] || '---';
-                document.getElementById('euro_usd').innerHTML = res['euro_usd']['mean'] || '---';
-                document.getElementById('btc_euro').innerHTML = res['btc_euro']['mean'] || '---';
-            },
-            3000
-        );
-        function stop() {
-            clearInterval(interval);
-        }
+        var calculator = new Calculator(),
+            ticker = new Ticker('ws://' + window.location.href.split('/')[2] + ':8080', calculator);
 
     </script>
 
